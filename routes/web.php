@@ -38,9 +38,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
 
 
-Route::get('import_from_live', [\App\Http\Controllers\ImportController::class, 'import'])->name('import_from_live');
-
-
 Route::get('reset2fa', function() {
     #### ACHTUNG NUR AUSFÜHREN WENN USER NICHT MEHR REIN KOMMT
     // $user = \App\Models\User::where('email', '__kzuppa@pcs-muenchen.de__')->first();

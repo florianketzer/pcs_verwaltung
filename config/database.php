@@ -64,28 +64,6 @@ return [
             ]) : [],
         ],
 
-        // Legacy-Live-Datenbank: wird ausschliesslich vom ImportController
-        // fuer den einmaligen Datenimport aus dem Altsystem verwendet.
-        'mysql_live' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL_LIVE'),
-            'host' => env('DB_HOST_LIVE', '127.0.0.1'),
-            'port' => env('DB_PORT_LIVE', '3306'),
-            'database' => env('DB_DATABASE_LIVE', 'forge'),
-            'username' => env('DB_USERNAME_LIVE', 'forge'),
-            'password' => env('DB_PASSWORD_LIVE', ''),
-            'unix_socket' => env('DB_SOCKET_LIVE', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
