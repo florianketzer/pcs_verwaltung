@@ -153,10 +153,17 @@ $(function() {
         $('#section-unterschrift-kunde').show();
     });
     
+    // Nur initialisieren, wenn das Canvas existiert. arbeitsbericht.js wird
+    // global geladen; auf Seiten ohne Unterschriftenfeld (z. B. /materials)
+    // ist das Canvas null -> sonst Crash in SignaturePad (getContext auf null).
     var canvasKundendienst = document.querySelector('canvas#canvas-unterschrift-kundendienst');
-    signaturePadKundendienst = new SignaturePad(canvasKundendienst);
+    if (canvasKundendienst) {
+        signaturePadKundendienst = new SignaturePad(canvasKundendienst);
+    }
     var canvasKunde = document.querySelector('canvas#canvas-unterschrift-kunde');
-    signaturePadKunde = new SignaturePad(canvasKunde);
+    if (canvasKunde) {
+        signaturePadKunde = new SignaturePad(canvasKunde);
+    }
     
     $('#btn-unterschrift-kundendienst-speichern').click(function() {
         var unterschrift = signaturePadKundendienst.toDataURL();
