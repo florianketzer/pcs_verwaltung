@@ -53,14 +53,16 @@ class FortifyServiceProvider extends ServiceProvider
                 $user &&
                 Hash::check(($request->password), $user->password)
             ) {
-                // 2FA ist erforderlich - prüfen ob aktiviert
-                if (empty($user->two_factor_secret)) {
+                // 2FA ist erforderlich - prüfen ob aktiviert.
+                // Die Pflicht laesst sich ueber FORTIFY_ENFORCE_2FA=false abschalten
+                // (nur fuer lokale Tests gedacht). Default = an -> Produktion unveraendert.
+                if (config('fortify.enforce_two_factor', true) && empty($user->two_factor_secret)) {
                     // 2FA nicht aktiviert - Login verweigern mit Fehlermeldung
                     throw ValidationException::withMessages([
                         'email' => ['Die Zwei-Faktor-Authentifizierung ist für dieses Konto erforderlich. Bitte aktivieren Sie 2FA in Ihren Einstellungen.'],
                     ]);
                 }
-                
+
                 // 2FA ist aktiviert - Fortify prüft automatisch den 2FA-Code
                 return $user;
             }

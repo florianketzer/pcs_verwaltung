@@ -47,6 +47,19 @@ return [
 
     'username' => 'email',
 
+    /*
+    |--------------------------------------------------------------------------
+    | 2FA-Pflicht erzwingen
+    |--------------------------------------------------------------------------
+    |
+    | Wenn true (Default), verweigert die custom Login-Logik Konten ohne
+    | aktiviertes 2FA. Nur fuer lokale Tests via FORTIFY_ENFORCE_2FA=false
+    | abschaltbar; Produktion bleibt damit unveraendert.
+    |
+    */
+
+    'enforce_two_factor' => (bool) env('FORTIFY_ENFORCE_2FA', true),
+
     'email' => 'email',
 
     /*
