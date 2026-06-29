@@ -243,9 +243,37 @@ class WorkreportController extends Controller
 
 
 
+    /**
+     * Endungen, die niemals als hochgeladenes Dokument zulaessig sind
+     * (ausfuehrbar oder skriptfaehig). Verhindert RCE / Stored-XSS, ohne
+     * legitime Dokument-Uploads (PDF, Bilder, Office) einzuschraenken.
+     */
+    private const BLOCKED_UPLOAD_EXTENSIONS = [
+        'php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'pht', 'phar', 'phps',
+        'cgi', 'pl', 'sh', 'exe', 'bat', 'com', 'htaccess',
+        'html', 'htm', 'xhtml', 'svg', 'js', 'mjs',
+    ];
+
     public function upload(Request $request) {
-        $filename = $request->file('files')->getClientOriginalName();
-        $path = $request->file('files')->storeAs('public/upload', $filename);
+        $file = $request->file('files');
+
+        if (! $file) {
+            return redirect()->route('arbeitsbericht', [$request->get('uid'), $request->get('aid')]);
+        }
+
+        // Sicherheit: Dateinamen auf den reinen Basisnamen reduzieren (kein
+        // Pfad-Traversal) und Steuerzeichen entfernen. Fuer normale Dateinamen
+        // ist das Ergebnis identisch -> keine sichtbare Aenderung.
+        $filename = basename($file->getClientOriginalName());
+        $filename = preg_replace('/[\x00-\x1F\/\\\\]+/', '', $filename);
+
+        // Sicherheit: ausfuehrbare/skriptfaehige Endungen ablehnen.
+        $ext = strtolower($file->getClientOriginalExtension());
+        if (in_array($ext, self::BLOCKED_UPLOAD_EXTENSIONS, true)) {
+            return redirect()->route('arbeitsbericht', [$request->get('uid'), $request->get('aid')]);
+        }
+
+        $path = $file->storeAs('public/upload', $filename);
         $url = Storage::url($path);
 
         // echo nl2br(print_r($request->all(),true));
