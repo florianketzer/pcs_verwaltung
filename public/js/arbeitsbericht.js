@@ -541,12 +541,11 @@ function arbeitsberichtSenden() {
         type: 'POST',
         // url: '/services/pdf_erstellen.php',
         url: '/workreports/createpdf',
-        // Komplettes Formular mitschicken, damit createpdf die aktuellen Daten
-        // selbst speichert und das PDF garantiert den Formularstand abbildet
-        // (verhindert leere/veraltete PDFs durch Timing). arbeitsbericht_id
-        // zusaetzlich anhaengen, da createpdf dieses Feld liest (Formular nutzt 'aid').
-        data: $('#arbeitsbericht-form').serialize()
-            + '&arbeitsbericht_id=' + encodeURIComponent($('#aid').val()),
+        data: {
+            '_token': $('input[name="_token"]').val(),
+            'arbeitsbericht_id': $('#aid').val(),
+            'email': $('#email').val()
+        },
         success: function() {
             message('success', 'Arbeitsbericht gespeichert und gesendet');
             // window.location = window.location;

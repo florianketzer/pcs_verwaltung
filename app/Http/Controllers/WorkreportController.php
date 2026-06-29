@@ -175,7 +175,10 @@ class WorkreportController extends Controller
         $filename = substr(str_replace(' ', '', $customer->company), 0, 10) . '_' . $workreport->number . '.pdf';
         $filename = preg_replace("/[^A-Za-z0-9.\-]/", '', $filename);
 
-        Storage::put('public/output/'.$filename, $content) ;
+        // Auf den 'public'-Disk schreiben (storage/app/public/output), da der
+        // Mailversand die Datei von dort liest. In Laravel 11+ zeigt der
+        // 'local'-Default-Disk auf storage/app/private, was sonst nicht passt.
+        Storage::disk('public')->put('output/'.$filename, $content);
 
         // return $pdf->download(substr(str_replace(' ', '', $customer->company), 0, 10) . '_' . $workreport->number . '.pdf');
 
@@ -273,7 +276,9 @@ class WorkreportController extends Controller
             return redirect()->route('arbeitsbericht', [$request->get('uid'), $request->get('aid')]);
         }
 
-        $path = $file->storeAs('public/upload', $filename);
+        // Auf den 'public'-Disk speichern (storage/app/public/upload), damit die
+        // Datei via Symlink/Mail erreichbar ist (L11+: 'local' = storage/app/private).
+        $path = $file->storeAs('upload', $filename, 'public');
         $url = Storage::url($path);
 
         // echo nl2br(print_r($request->all(),true));

@@ -33,7 +33,7 @@
 </head>
 <body>
 
-    <img src="{{asset('images/pcs_logo_new.png')}}">
+    <img src="{{public_path('images/pcs_logo_new.png')}}">
 
     <h2>Arbeitsbericht # {{$workreport->number}}</h2><br/>
 
@@ -128,7 +128,7 @@
                         </span>
                     @else
                         <td>
-                            <img src="{{asset('images/unendlich.png')}}">
+                            <img src="{{public_path('images/unendlich.png')}}">
                     @endif
                     </td>
                 </tr>
@@ -316,7 +316,7 @@
             <tr>
                 <td>Arbeit beendet</td>
                 <td colspan="6">
-                    <span style="color:green; font-weight: bold;"><img src="{{asset('images/checkmark.png')}}" style="height: 15px;"></span>
+                    <span style="color:green; font-weight: bold;"><img src="{{public_path('images/checkmark.png')}}" style="height: 15px;"></span>
                 </td>
             </tr>
         @endif
@@ -336,12 +336,12 @@
         <tr>
             <td>
                 @if(is_file(storage_path('app/public/upload/').'/unterschrift_kundendienst_' . $workreport->id . '.png'))
-                    <img src="{{asset('storage/upload'.'/unterschrift_kundendienst_' . $workreport->id . '.png')}}" id="img-unterschrift-kundendienst" class="img-responsive"/>
+                    <img src="{{storage_path('app/public/upload/').'/unterschrift_kundendienst_' . $workreport->id . '.png'}}" id="img-unterschrift-kundendienst" class="img-responsive"/>
                 @endif
             </td>
             <td>
                 @if(is_file(storage_path('app/public/upload/').'/unterschrift_kunde_' . $workreport->id . '.png'))
-                    <img src="{{asset('storage/upload'.'/unterschrift_kunde_' . $workreport->id . '.png')}}" id="img-unterschrift-kunde" class="img-responsive"/>
+                    <img src="{{storage_path('app/public/upload/').'/unterschrift_kunde_' . $workreport->id . '.png'}}" id="img-unterschrift-kunde" class="img-responsive"/>
                 @endif
             </td>
         </tr>
