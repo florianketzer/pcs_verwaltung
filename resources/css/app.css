@@ -1,0 +1,180 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+@import 'bootstrap';
+
+.form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+  }
+  
+  .form-row > .col {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  label {
+    margin-bottom: 0.5rem;
+  }
+
+
+  /*************
+ * Allgemein * 
+ *************/
+
+header {
+  margin-top: 1em;
+}
+.header-menu {
+  float: right;
+  list-style-type: none;
+}
+.header-menu li {
+  float: left;
+  margin-left: 40px;
+}
+.underline {
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+footer {
+  margin-bottom: 50px;
+}
+#message-box {
+  margin-top: 2em;
+  font-weight: bold;
+}
+#message-box .success {
+  color: #4cae4c;
+}
+#message-box .error {
+  color: #ff0000;
+}
+label {
+  font-size: 11px;
+  font-weight: normal;
+}
+hr {
+  border-color: #000;
+}
+hr.dashed {
+  border-style: dashed;
+}
+.inner-addon {
+  position: relative;
+}
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+.left-addon .glyphicon {
+  left: 0px;
+}
+.right-addon .glyphicon {
+  right: 0px;
+}
+.left-addon input {
+  padding-left: 30px;
+}
+.right-addon input {
+  padding-right: 30px;
+}
+
+/*********
+* Suche * 
+*********/
+
+table.suchergebnis {
+  width: 100%;
+}
+table.suchergebnis tr.kunde {
+  background-color: #eee;
+}
+
+/*********
+* Kunde * 
+*********/
+
+span.document {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+/*****************
+* Materialliste * 
+*****************/
+
+.material-line {
+  margin-bottom: 10px;
+}
+
+/******************
+* Arbeitsbericht * 
+******************/
+
+table.customerdata td:nth-child(even) {
+  width: 25%;
+}
+table.customerdata .tag {
+  color: #aaa;
+}
+table.input td {
+  padding: 0 5px 5px 0;
+}
+tr.summary-header {
+  background-color: #AAAAAA;
+  font-size: 11px;
+}
+.fineprint {
+  font-size: 11px;
+  padding: 1em 0 1em 0;
+}
+canvas.unterschrift {
+  border: 1px dashed #000;
+  /*margin: 0 auto 1em auto;*/
+  margin-bottom: 1em;
+  padding: 0;
+  width: 650px;
+  display: block;
+}
+.no-travel {
+margin: 5px 0;
+cursor: pointer;
+color: #4cae4c;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default:focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.btn-default:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.btn-default:active {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
