@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Workreport;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,15 +48,6 @@ Route::get('reset2fa', function() {
 });
 
 
-
-
-Route::get('pdf/{workreport}', function(Request $request, Workreport $workreport) {
-
-    // $workreport = Workreport::find($request->get('arbeitsbericht_id'));
-    $customer = $workreport->user->customer;
-
-    return view('workreportpdf', compact(['workreport', 'customer']));
-});
 
 
 
